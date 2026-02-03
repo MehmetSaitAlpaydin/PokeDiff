@@ -181,10 +181,6 @@ See [DIFFUSION_THEORY.md](DIFFUSION_THEORY.md) for:
 - Pokemon dataset from Kaggle
 - Implementation inspired by DDPM paper and modern generative AI research
 
-## 📝 License
-
-MIT License
-
 ---
 
 **Built with PyTorch 🔥**
