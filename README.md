@@ -2,7 +2,7 @@
 
 **A Denoising Diffusion Probabilistic Model (DDPM) for generating Pokemon images from scratch.**
 
-Built from the ground up to understand diffusion models - no pre-trained models, no black boxes, just pure implementation and learning.
+Complete implementation of a diffusion model pipeline - no pre-trained models, pure PyTorch implementation.
 
 ---
 
@@ -64,11 +64,13 @@ python train.py
 ```
 
 Training hyperparameters:
-- **Epochs**: 2000
+- **Epochs**: 5000
 - **Batch Size**: 16
 - **Learning Rate**: 0.0001
 - **Image Size**: 64×64
 - **Timesteps**: 1000
+
+Checkpoints are saved at epochs: 1, 1000, 2000, 3000, 4000, 5000
 
 ### 3. Generate Pokemon
 ```bash
@@ -77,21 +79,32 @@ python generate.py --checkpoint checkpoints/final_model.pt --num_images 64
 
 ## 📊 Training Progress
 
-The model learns progressively:
-- **Epoch 100**: Basic colors and shapes
-- **Epoch 300**: Recognizable Pokemon structures
-- **Epoch 500**: Good quality with diversity
-- **Epoch 1000-2000**: High-quality, varied Pokemon
+The model learns progressively over 5000 epochs:
 
-Generated samples are saved every 10 epochs to `outputs/generated_epoch_XXXX.png`.
+### Early Stage (Epoch 1)
+![Epoch 1](outputs/generated_epoch_0001.png)
+Pure noise - the model hasn't learned anything yet. This is what the reverse diffusion process starts with.
 
-## 🧠 Key Learnings
+### Mid Training (Epoch 1000)
+![Epoch 1000](outputs/generated_epoch_1000.png)
+Recognizable Pokemon with good shapes, colors, and features. The model has learned the underlying data distribution.
 
-### Why Diffusion > GAN?
+### Later Stages (Epoch 2000-5000)
+Continued refinement with:
+- Sharper details and cleaner edges
+- More coherent Pokemon features
+- Better color consistency
+- Reduced artifacts
+
+Generated samples are saved at epochs 1, 1000, 2000, 3000, 4000, and 5000 to `outputs/`.
+
+## 🧠 Key Concepts
+
+### Why Diffusion Models?
 1. **Stability**: Simple MSE loss vs. adversarial training
-2. **Quality**: 1000 small denoising steps vs. 1 big generation step
+2. **Quality**: 1000 small denoising steps vs. single-step generation
 3. **Diversity**: No mode collapse issues
-4. **Training**: Easier to debug and converge
+4. **Scalability**: Easier to train and debug
 
 ### Implementation Details
 - **Data Augmentation**: Essential with only 819 images
@@ -106,9 +119,9 @@ Generated samples are saved every 10 epochs to `outputs/generated_epoch_XXXX.png
 
 Training on 819 Pokemon images with data augmentation:
 - **Model Size**: 54,195,523 parameters
-- **Training Time**: ~X hours on RTX 4090 (2000 epochs)
-- **Quality**: High-quality diverse Pokemon generation
-- **Diversity**: Successfully avoids memorization through augmentation
+- **Training**: 5000 epochs with strategic checkpoints
+- **Quality**: Progressive improvement from noise to detailed Pokemon
+- **Diversity**: Data augmentation prevents overfitting and memorization
 
 ## 🛠️ Technical Implementation
 
@@ -166,13 +179,12 @@ See [DIFFUSION_THEORY.md](DIFFUSION_THEORY.md) for:
 ## 🙏 Acknowledgments
 
 - Pokemon dataset from Kaggle
-- Built as part of learning journey to understand DeepFaceLive and modern generative models
-- No pre-trained models used - everything implemented from scratch for learning
+- Implementation inspired by DDPM paper and modern generative AI research
 
 ## 📝 License
 
-MIT License - Feel free to use for learning and experimentation!
+MIT License
 
 ---
 
-**Built with PyTorch 🔥 | Trained on NVIDIA RTX 4090 💪 | Generated with ❤️**
+**Built with PyTorch 🔥**
