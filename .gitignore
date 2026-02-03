@@ -57,8 +57,7 @@ Thumbs.db
 data/pokemon_jpg/*.jpg
 data/pokemon_jpg/*.png
 
-# Training outputs - too large for git
-outputs/
+# Training checkpoints - too large for git
 checkpoints/*.pt
 checkpoints/*.pth
 
